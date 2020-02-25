@@ -48,7 +48,7 @@ exports.addMediatorV1 = (req, res, next) => {
     'VALUES (?,?,?,?)';
   db.query(
     sql,
-    [req.body.use, req.body.descript, req.body.book_id, req.body.mediator_id],
+    [req.body.use, req.body.descript, req.body.book_id, req.body.extension_id],
     (err, query) => {
       if (err) {
         console.log(sql + 'error : ');
@@ -82,7 +82,7 @@ exports.updateMediatorV1 = (req, res, next) => {
       req.body.use,
       req.body.descript,
       req.body.book_id,
-      req.body.mediator_id,
+      req.body.extension_id,
       req.params.id
     ],
     (err, query) => {
