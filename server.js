@@ -21,6 +21,8 @@ const bookRoutes = require('./routes/bookRoutes');
 const extensionRoutes = require('./routes/extensionRoutes');
 const mediatorRoutes = require('./routes/mediatorRoutes');
 const apiDocsRoutes = require('./routes/apiDocsRoutes');
+const fbAuthenRoutes = require('./routes/fbAuthenRoutes');
+const fbExtensionRoutes = require('./routes/fbExtensionRoutes');
 // routes //
 
 // bodyParser //
@@ -35,7 +37,9 @@ app.use('/lists', listRoutes);
 app.use('/books', bookRoutes);
 app.use('/extensions', extensionRoutes);
 app.use('/mediators', mediatorRoutes);
-app.use('/api-docs',apiDocsRoutes)
+app.use('/api-docs',apiDocsRoutes);
+app.use('/fbAuthen',fbAuthenRoutes);
+app.use('/fbExtension',fbExtensionRoutes);
 // routes //
 
 // server //
