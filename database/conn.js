@@ -1,10 +1,10 @@
 // mysql
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'ledger_account'
+  host: process.env.SERVER_NAME,
+  user:  process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 });
 // mysql
 

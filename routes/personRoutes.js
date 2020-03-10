@@ -5,7 +5,7 @@ const versionRoutes = require('express-routes-versioning')();
 //  packeage //
 
 //  controller //
-const personController = require('../controllers/personController');
+const personControllerV1 = require('../controllers/v-1.0.0/personController');
 //  controller //
 
 //  versionRoutes //
@@ -15,49 +15,22 @@ router.use(function(req, res, next) {
 });
 //  versionRoutes //
 
-// get at person id
-router.get(
-  '/:id',
+// activeAllBookByPersonId
+router.patch(
+  '/active/:id',
   versionRoutes({
-    '1.0.0': personController.getAtPersonV1
+    '1.0.0': personControllerV1.activeAllBookByPersonId
   })
 );
-// get all person
+// activeAllBookByPersonId
 
-// get all person
-router.get(
-  '/',
+// deactiveAllBookByPersonId
+router.patch(
+  '/deactive/:id',
   versionRoutes({
-    '1.0.0': personController.getAllPersonV1
+    '1.0.0': personControllerV1.deactiveAllBookByPersonId
   })
 );
-// get all person
-
-// add person
-router.post(
-  '/',
-  versionRoutes({
-    '1.0.0': personController.addPersonV1
-  })
-);
-// add person
-
-// update person
-router.put(
-  '/:id',
-  versionRoutes({
-    '1.0.0': personController.updatePersonV1
-  })
-);
-// update person
-
-// deleteAt person
-router.delete(
-  '/:id',
-  versionRoutes({
-    '1.0.0': personController.deleteAtPersonV1
-  })
-);
-// deleteAt person
+// deactiveAllBookByPersonId
 
 module.exports = router;

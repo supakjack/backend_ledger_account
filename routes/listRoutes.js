@@ -5,7 +5,7 @@ const versionRoutes = require('express-routes-versioning')();
 //  packeage //
 
 //  controller //
-const listController = require('../controllers/listControllers');
+const listControllerV1 = require('../controllers/v-1.0.0/listController');
 //  controller //
 
 //  versionRoutes //
@@ -15,49 +15,22 @@ router.use(function(req, res, next) {
 });
 //  versionRoutes //
 
-// get at List id
-router.get(
-  '/:id',
-  versionRoutes({
-    '1.0.0': listController.getAtListV1
-  })
-);
-// get all List
-
-// get all List
-router.get(
-  '/',
-  versionRoutes({
-    '1.0.0': listController.getAllListV1
-  })
-);
-// get all List
-
-// add List
+// addIncomeListByBookId
 router.post(
-  '/',
+  '/income',
   versionRoutes({
-    '1.0.0': listController.addListV1
+    '1.0.0': listControllerV1.addIncomeListByBookId
   })
 );
-// add List
+// addIncomeListByBookId
 
-// update List
-router.put(
-  '/:id',
+// addExpenseListByBookId
+router.post(
+  '/expense',
   versionRoutes({
-    '1.0.0': listController.updateListV1
+    '1.0.0': listControllerV1.addExpenseListByBookId
   })
 );
-// update List
-
-// deleteAt List
-router.delete(
-  '/:id',
-  versionRoutes({
-    '1.0.0': listController.deleteAtListV1
-  })
-);
-// deleteAt List
+// addExpenseListByBookId
 
 module.exports = router;
