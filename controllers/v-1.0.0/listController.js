@@ -53,27 +53,54 @@ db.beginTransaction(err => {
 }); // end beginTransaction
 // 
 };
-// updateIncomeListByBookId = (req, res) => {
-//   let sql =
-//     'UPDATE la_book ' +
-//     'SET lab_amount = lab_amount+?, lab_income = lab_income+? ' +
-//     'WHERE lab_id=? '
-//   sqlHelper.builder(201, version, db, res, sql, [
-//     req.body.money,
-//     req.body.money,
-//     req.body.id
-//   ]);
-// };
 
 exports.addExpenseListByBookId = (req, res) => {
-  let sql =
-    'INSERT INTO la_list ' +
-    '(lal_money, lal_type, lal_descript, lal_lab_id) ' +
-    'VALUES (?, ? , ? , ? ) ';
-  sqlHelper.builder(201, version, db, res, sql, [
-    req.body.money,
-    2,
-    req.body.descript,
-    req.body.id
-  ]);
+  //
+  db.beginTransaction(err => {
+    if (err) {
+      throw err;
+    }
+    let sql =
+      'INSERT INTO la_list ' +
+      '(lal_money, lal_type, lal_descript, lal_lab_id) ' +
+      'VALUES (?, ? , ? , ? ) ';
+    db.query(sql, [
+      req.body.money,
+      2,
+      req.body.descript,
+      req.body.id],
+      (error, query) => {
+        if (error) {
+          return db.rollback(function () {
+            throw error;
+          });
+        }
+        sql =
+          'UPDATE la_book ' +
+          'SET lab_amount = lab_amount-?, lab_expense = lab_expense+? ' +
+          'WHERE lab_id=? ';
+        db.query(sql, [req.body.money, req.body.money, req.body.id], (error, query) => {
+          if (error) {
+            return db.rollback(function () {
+              throw error;
+            });
+          }
+          db.commit(err => {
+            if (err) {
+              return db.rollback(function () {
+                throw err;
+              });
+            }
+            console.log('success!');
+            res.status(200).json({
+              code: 200,
+              version: version,
+              message: 'Success response',
+              data: query
+            });
+          }); // end commit
+        }); // end delete book
+      }); // end delete list
+  }); // end beginTransaction
+//
 };
