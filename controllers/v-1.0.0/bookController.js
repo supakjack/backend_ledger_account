@@ -59,17 +59,6 @@ exports.getIncomeByBookIdNowDate = (req, res) => {
   sqlHelper.builder(200, version, db, res, sql, [req.params.id]);
 };
 
-exports.getIncomeByBookIdGroupDate = (req, res) => {
-  let sql =
-    'SELECT SUM(la_list.lal_money) AS income ' +
-    'FROM la_book ' +
-    'LEFT JOIN la_list ' +
-    'ON la_book.lab_id = la_list.lal_lab_id ' +
-    "WHERE lal_timestamp LIKE CONCAT(CURDATE(),'%') " +
-    'AND lab_id = ? ';
-  sqlHelper.builder(200, version, db, res, sql, [req.params.id]);
-};
-
 exports.getExpenseByBookIdNowDate = (req, res) => {
   let sql =
   'SELECT SUM(la_list.lal_money) AS income ' +
