@@ -5,8 +5,8 @@ const version = '1.0.0';
 exports.getBookByAuthenId = (req, res) => {
   let sql =
     'SELECT * ' + 
-    'FROM la_list ' + 
-    'LEFT JOIN la_book '+
+    'FROM la_book ' + 
+    'LEFT JOIN la_list '+
     'ON la_list.lal_lab_id = la_book.lab_id '+
     'LEFT JOIN la_person '+
     'ON la_book.lab_lap_id = la_person.lap_id  '+
