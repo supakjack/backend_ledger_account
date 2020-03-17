@@ -51,6 +51,7 @@ exports.getIncomeByBookIdNowDate = (req, res) => {
   let sql =
     'SELECT IF( COUNT(lab_income) = 0 , 0 , lab_income) AS income ' +
     'FROM la_book ' +
+    
     "WHERE lab_timestamp LIKE CONCAT(CURDATE(),'%') " +
     'AND lab_id = ? ';
   sqlHelper.builder(200, version, db, res, sql, [req.params.id]);
@@ -121,3 +122,5 @@ exports.deleteBookByBookId = (req, res) => {
     }); // end delete list
   }); // end beginTransaction
 };
+
+
