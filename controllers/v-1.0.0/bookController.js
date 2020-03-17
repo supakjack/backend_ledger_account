@@ -51,7 +51,9 @@ exports.getIncomeByBookIdNowDate = (req, res) => {
   let sql =
     'SELECT IF( COUNT(lab_income) = 0 , 0 , lab_income) AS income ' +
     'FROM la_book ' +
-    "WHERE lab_timestamp LIKE CONCAT(CURDATE(),'%') " +
+    'LEFT JOIN la_list ' +
+    'ON la_book.lab_id = la_list.lal_lab_id ' +
+    "WHERE lal_timestamp LIKE CONCAT(CURDATE(),'%') " +
     'AND lab_id = ? ';
   sqlHelper.builder(200, version, db, res, sql, [req.params.id]);
 };
@@ -60,7 +62,9 @@ exports.getExpenseByBookIdNowDate = (req, res) => {
   let sql =
     'SELECT IF( COUNT(lab_expense) = 0 , 0 , lab_expense) AS expense ' +
     'FROM la_book ' +
-    "WHERE lab_timestamp LIKE CONCAT(CURDATE(),'%') " +
+    'LEFT JOIN la_list ' +
+    'ON la_book.lab_id = la_list.lal_lab_id ' +
+    "WHERE lal_timestamp LIKE CONCAT(CURDATE(),'%') " +
     'AND lab_id = ? ';
   sqlHelper.builder(200, version, db, res, sql, [req.params.id]);
 };
