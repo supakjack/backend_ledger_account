@@ -61,7 +61,7 @@ exports.getIncomeByBookIdNowDate = (req, res) => {
 
 exports.getExpenseByBookIdNowDate = (req, res) => {
   let sql =
-  'SELECT SUM(la_list.lal_money) AS income ' +
+  'SELECT SUM(la_list.lal_money) AS expense ' +
   'FROM la_book ' +
   'LEFT JOIN la_list ' +
   'ON la_book.lab_id = la_list.lal_lab_id ' +
